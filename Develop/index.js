@@ -12,24 +12,58 @@ const questions = [
         name: 'title',
     },
     {
+        type: 'input',
+        message: 'Provide a description of your project:',
+        name: 'description',
+    },
+    {
+        type: 'input',
+        message: 'Provide the installation instructions:',
+        name: 'installation',
+    },
+    {
+        type: 'input',
+        message: 'Provide the usage information:',
+        name: 'usage',
+    },
+    {
+        type: 'input',
+        message: 'Provide the contribution guidelines:',
+        name: 'contributing',
+    },
+    {
+        type: 'input',
+        message: 'Provide the test instructions:',
+        name: 'tests',
+    },
+    {
         type: 'list',
         message: 'What license would you like to use for this project?',
         name: 'license',
         choices: ['MIT','APACHE 2.0','GPL 3.0','BSD 3','None'],
     },
+    {
+        type: 'input',
+        message: 'Enter your GitHub username:',
+        name: 'github',
+    },
+    {
+        type: 'input',
+        message: 'Enter your email address:',
+        name: 'email',
+    },
 ];
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
-    fs.writeFileSync();
+    fs.writeFileSync(path.join(process.cwd(), fileName), data);
 }
 
 // TODO: Create a function to initialize app
 function init() {
-    inquirer.createPromptModule(questions).then((userAnswers) => {
-        writeToFile('README.md', generateMarkdown({ ...userAnswers}));
-    }
-    );
+    inquirer.prompt(questions).then((userAnswers) => {
+        writeToFile('README.md', generateMarkdown({ ...userAnswers }));
+    });
 }
 
 // Function call to initialize app
